@@ -1,6 +1,8 @@
 *.log
 *.db
 
+/Properties
+
 # User-specific files
 *.rsuser
 *.suo
