@@ -8,7 +8,7 @@ namespace Triangle
 {
     public class Triangle
     {
-        public static bool IsTriangle(double sideA, double sideB, double sideC)
+        public static bool IsPossible(double sideA, double sideB, double sideC)
         {
             return (sideA > 0 && sideB > 0 && sideC > 0 && (sideA + sideB > sideC) && (sideB + sideC > sideA) && (sideC + sideA > sideB));
         }
