@@ -17,7 +17,7 @@ namespace Unit_Tests
         [Fact]
         public void IsPossible_UnrealTriangle()
         {
-            Assert.True(Triangle.Triangle.IsPossible(3, 3, 1), "Error: such triangle can't exists!");
+            Assert.True(Triangle.Triangle.IsPossible(3, 3, 20), "Error: such triangle can't exists!");
         }
         [Fact]
         public void IsPossible_WithOneNegativeSide()
@@ -30,7 +30,7 @@ namespace Unit_Tests
             Assert.True(Triangle.Triangle.IsPossible(-6, -7, 8), "Error: triangle has two negative sides!");
         }
         [Fact]
-        public void IsPossible_WithThreeNegativeSides()
+        public void IsPossible_AllNegativeSides()
         {
             Assert.True(Triangle.Triangle.IsPossible(-6, -7, -8), "Error: triangle has three negative sides!");
         }
@@ -45,7 +45,7 @@ namespace Unit_Tests
             Assert.True(Triangle.Triangle.IsPossible(0, 0, 7), "Error: triangle has two zero sides!");
         }
         [Fact]
-        public void IsPossible_WithThreeZeroSides()
+        public void IsPossible_AllNullSides()
         {
             Assert.True(Triangle.Triangle.IsPossible(0, 0, 0), "Error: triangle has three zero sides!");
         }
