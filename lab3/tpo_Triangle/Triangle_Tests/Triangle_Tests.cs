@@ -32,7 +32,7 @@ namespace Unit_Tests
         [Fact]
         public void IsPossible_AllNegativeSides()
         {
-            Assert.True(Triangle.Triangle.IsPossible(-6, -7, -8), "Error: triangle has three negative sides!");
+            Assert.True(Triangle.Triangle.IsPossible(-6, -7, -8), "Error: triangle has all negative sides!");
         }
         [Fact]
         public void IsPossible_WithOneZeroSide()
@@ -47,7 +47,7 @@ namespace Unit_Tests
         [Fact]
         public void IsPossible_AllNullSides()
         {
-            Assert.True(Triangle.Triangle.IsPossible(0, 0, 0), "Error: triangle has three zero sides!");
+            Assert.True(Triangle.Triangle.IsPossible(0, 0, 0), "Error: triangle has all zero sides!");
         }
         [Fact]
         public void IsPossible_WithNegativeAndZeroSides()
