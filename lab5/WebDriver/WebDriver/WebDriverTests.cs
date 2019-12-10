@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 
-namespace Selenium
+namespace WebDriver
 {
     [TestFixture]
     public class WebTests
@@ -31,37 +31,33 @@ namespace Selenium
         //test 1
         public void IsRemovePassangerButtonDisabled()
         {
-            wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(5));
-
-            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            var countPassangers = webDriver.FindElement(By.XPath("//div[@class = 'js-travellers-select travellers-select input-pax btn-select']"));
-            countPassangers.Click();
-
-            var removeAdultPassanger = webDriver.FindElement(By.XPath("//span[@id='adults-button-min']"));
-            removeAdultPassanger.Click();
-
-            var removeAdultPassangerDisabled = webDriver.FindElement(By.XPath("//span[@class = 'min disabled']"));
-            
-            Assert.IsTrue(removeAdultPassanger.Displayed);
+            StartPage startPage = new StartPage(webDriver).TicketsClick();
+            Assert.IsTrue(startPage.zeroAdultPassanger.Displayed);
         }
 
         [Test]
         //test 2
         public void RequiredDepartError()
         {
-            var departureStation = webDriver.FindElement(By.XPath("//input[@name = 're_ptpsearches%5B0%5D%2EoriginCityName']"));
-            departureStation.SendKeys("London");
-
-            var arrivalStation = webDriver.FindElement(By.XPath("//input[@name = 're_ptpsearches%5B0%5D%2EdestinationCityName']"));
-            arrivalStation.SendKeys("Bedford");
-
-            var searchButton = webDriver.FindElement(By.XPath("//button[@class = 'js-ptpform-submit form-submit btn-cta']"));
-            searchButton.Click();
-
-            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            var requiredDepart = webDriver.FindElement(By.XPath("//input[@class = 'form-text js-departuredate required error hasDatepicker livevalidated']"));
-
-            Assert.IsTrue(requiredDepart.Displayed);
+            StartPage startPage = new StartPage(webDriver).FromStationClick("London").ArrivalStationClick("Bedford").SearchClick();
+            Assert.IsTrue(startPage.requiredDepartureDateSign.Displayed);
         }
+
+        [Test]
+        //test3
+        public void FailedLoginAttemp()
+        {
+            StartPage startPage = new StartPage(webDriver).LoginMenuClick().FillEmailAndPasswordFields("skyblock@gmail.com", "123456").LoginButtonClick();
+            Assert.IsTrue(startPage.wrongLoginMessage.Displayed);
+        }
+
+        [Test]
+        //test4
+        public void FailedRailPassSearch()
+        {
+            StartPage startPage = new StartPage(webDriver).RailPassesClick().SearchRailPassesClick();
+            Assert.IsTrue(startPage.requiredCountrySign.Displayed);
+        }
+
     }
 }
