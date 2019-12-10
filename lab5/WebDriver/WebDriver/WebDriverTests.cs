@@ -28,7 +28,6 @@ namespace WebDriver
         }
 
         [Test]
-        //test 1
         public void IsRemovePassangerButtonDisabled()
         {
             StartPage startPage = new StartPage(webDriver).TicketsClick();
@@ -36,7 +35,6 @@ namespace WebDriver
         }
 
         [Test]
-        //test 2
         public void RequiredDepartError()
         {
             StartPage startPage = new StartPage(webDriver).FromStationClick("London").ArrivalStationClick("Bedford").SearchClick();
@@ -44,7 +42,6 @@ namespace WebDriver
         }
 
         [Test]
-        //test3
         public void FailedLoginAttemp()
         {
             StartPage startPage = new StartPage(webDriver).LoginMenuClick().FillEmailAndPasswordFields("skyblock@gmail.com", "123456").LoginButtonClick();
@@ -52,7 +49,6 @@ namespace WebDriver
         }
 
         [Test]
-        //test4
         public void FailedRailPassSearch()
         {
             StartPage startPage = new StartPage(webDriver).RailPassesClick().SearchRailPassesClick();

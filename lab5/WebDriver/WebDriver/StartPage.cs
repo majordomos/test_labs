@@ -7,54 +7,54 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace WebDriver
 {
-    class StartPage
+    public class StartPage
     {
         public StartPage (IWebDriver webDriver)
         {
             PageFactory.InitElements(webDriver, this);
         }
-
-        private IWebElement passangersCount;
+        
         [FindsBy(How = How.XPath, Using = "//div[@class = 'js-travellers-select travellers-select input-pax btn-select']")]
+        private IWebElement passangersCount;
         
-        private IWebElement decreasePassangerCountl;
         [FindsBy(How = How.XPath, Using = "//span[@id='adults-button-min']")]
+        private IWebElement decreasePassangerCountl;
         
-        public IWebElement zeroAdultPassanger;
         [FindsBy(How = How.XPath, Using = "//span[@class = 'min disabled']")]
+        public IWebElement zeroAdultPassanger;
         
-        private IWebElement departureStation;
         [FindsBy(How = How.XPath, Using = "//input[@name = 're_ptpsearches%5B0%5D%2EoriginCityName']")]
+        private IWebElement departureStation;
         
-        private IWebElement arrivalStation;
         [FindsBy(How = How.XPath, Using = "//input[@name = 're_ptpsearches%5B0%5D%2EdestinationCityName']")]
+        private IWebElement arrivalStation;
         
-        private IWebElement searchTicketButton;
         [FindsBy(How = How.XPath, Using = "//button[@class = 'js-ptpform-submit form-submit btn-cta']")]
+        private IWebElement searchTicketButton;
         
-        public IWebElement requiredDepartureDateSign;
         [FindsBy(How = How.XPath, Using = "//input[@class = 'form-text js-departuredate required error hasDatepicker livevalidated']")]
-    
-        private IWebElement loginFormButton;
+        public IWebElement requiredDepartureDateSign;
+        
         [FindsBy(How = How.XPath, Using = "//div[@class = 'header_button menu_btn dropdown']")]
+        private IWebElement loginFormButton;
         
+        [FindsBy(How = How.XPath, Using = "//input[@name = 're_username']")]
         private IWebElement inputEmailField;
-        [FindsBy(How = How.XPath, Using = "//input[@name = 're_username']")] 
         
-        private IWebElement inputPasswordField;
         [FindsBy(How = How.XPath, Using = "//input[@name = 're_password']")]
+        private IWebElement inputPasswordField;
         
-        private IWebElement loginButton;
         [FindsBy(How = How.XPath, Using = "//a[@class = 'ure-btn main-btn js-login-async']")]
+        private IWebElement loginButton;
         
-        private IWebElement railPassesButton;
         [FindsBy(How = How.XPath, Using = "//li[@class = 'rtab transparent-black']")]
+        private IWebElement railPassesButton;
         
-        private IWebElement searchRailPassButton;
         [FindsBy(How = How.XPath, Using = "//button[@class = 'js-ptpform-submit form-submit btn-cta form-pass']")]
+        private IWebElement searchRailPassButton;
         
-        public IWebElement requiredCountrySign;
         [FindsBy(How = How.XPath, Using = "//input[@class = 'input warning']")]
+        public IWebElement requiredCountrySign;
 
         [FindsBy(How = How.XPath, Using = "//div[@class = 'message error-message']")]
         public IWebElement wrongLoginMessage;
