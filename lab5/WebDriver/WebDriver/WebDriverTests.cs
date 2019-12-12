@@ -10,8 +10,6 @@ namespace WebDriver
     public class WebTests
     {
         public IWebDriver webDriver;
-        WebDriverWait wait;
-
         [SetUp]
         public void StartBrowserAndGoToTheSite()
         {

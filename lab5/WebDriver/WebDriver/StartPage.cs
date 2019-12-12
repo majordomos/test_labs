@@ -4,6 +4,11 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Support.PageObjects;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace WebDriver
 {
@@ -58,7 +63,34 @@ namespace WebDriver
 
         [FindsBy(How = How.XPath, Using = "//div[@class = 'message error-message']")]
         public IWebElement wrongLoginMessage;
-            
+        
+        public static DateTime currentDate = DateTime.Today;
+        string stringDate = currentDate.AddDays(2).Day.ToString();
+
+        [FindsBy(How = How.XPath, Using = "table[@class = 'ui - datepicker - calendar']")]
+        public IWebElement dataPicker;
+
+        [FindsBy(How = How.TagName, Using = "tbody")]
+        public IWebElement tableBody;
+
+        public StartPage ChooseDateClick()
+        {
+            var rows = tableBody.FindElements(By.TagName("tr"));
+            foreach (var row in rows)
+            {
+                var cells = row.FindElements(By.TagName("td"));
+                foreach (var cell in cells)
+                {
+                    var daysInDataPicker = cell.FindElement(By.TagName("a")).GetAttribute("text");
+                    if (daysInDataPicker == stringDate)
+                    {
+                        cell.Click();
+                    }
+                }
+            }
+            return this;
+        }
+
         public StartPage TicketsClick()
         {
             passangersCount.Click();
