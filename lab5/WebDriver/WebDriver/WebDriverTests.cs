@@ -1,7 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
 namespace WebDriver
@@ -13,7 +13,7 @@ namespace WebDriver
         [SetUp]
         public void StartBrowserAndGoToTheSite()
         {
-            webDriver = new ChromeDriver();
+            webDriver = new FirefoxDriver();
             webDriver.Manage().Window.Maximize();
             webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(60);
             webDriver.Navigate().GoToUrl("https://raileurope-world.com/");
