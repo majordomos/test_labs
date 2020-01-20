@@ -22,11 +22,17 @@ namespace RailEurope.Pages
         [FindsBy(How = How.XPath, Using = "//input[@id = 'add-1-1']")]
         public IWebElement selectFareButton;
 
-        [FindsBy(How = How.XPath, Using = "//input[@class = 'form-text js-departuredate required error hasDatepicker livevalidated']")]
+        [FindsBy(How = How.XPath, Using = "/html/body/div[7]/article/div/div[2]/div[1]/div/div/div[2]/form/div[2]/div/div[1]/div[2]/div[1]/label[2]")]
         public IWebElement requiredDepartureDateSign;
 
-        [FindsBy(How = How.XPath, Using = "//div[@class = 'js-ptpresult-packagetable ptpresults-overview ptpresults-horizontal']")]
+        [FindsBy(How = How.XPath, Using = "/html/body/div[3]/article/div/div/div/div[2]/div/div[1]/div[2]/div[5]")]
         public IWebElement listOfTrains;
+
+        public TrainListPage WaitListOfTrains()
+        {
+            new WebDriverWait(driver, TimeSpan.FromSeconds(15)).Until(ExpectedConditions.ElementIsVisible(By.XPath("/html/body/div[3]/article/div/div/div/div[2]/div/div[1]/div[2]/div[5]")));
+            return this;
+        }
 
         public TrainListPage FirstTrainClick()
         {

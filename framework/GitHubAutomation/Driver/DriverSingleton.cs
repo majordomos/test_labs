@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Edge;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
@@ -25,7 +25,7 @@ namespace RailEurope.Driver
                         break;
                     default:
                         new DriverManager().SetUpDriver(new ChromeConfig());
-                        driver = new ChromeDriver();
+                        driver = new FirefoxDriver();
                         break;
                 }
                 driver.Manage().Window.Maximize();

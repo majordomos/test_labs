@@ -28,13 +28,13 @@ namespace RailEurope.Pages
         [FindsBy(How = How.XPath, Using = "//button[@class = 'js-ptpform-submit form-submit btn-cta']")]
         private IWebElement searchTicketButton;
         
-        [FindsBy(How = How.XPath, Using = "//div[@class = 'header_button menu_btn dropdown']")]
+        [FindsBy(How = How.XPath, Using = "//div[@id = 'header_login']")]
         private IWebElement loginFormButton;
 
-        [FindsBy(How = How.XPath, Using = "//input[@name = 're_username']")]
+        [FindsBy(How = How.XPath, Using = "/html/body/header/div[1]/div[2]/div[4]/ul[2]/div/div/li/div[3]/form/div[1]/input")]
         private IWebElement inputEmailField;
 
-        [FindsBy(How = How.XPath, Using = "//input[@name = 're_password']")]
+        [FindsBy(How = How.XPath, Using = "/html/body/header/div[1]/div[2]/div[4]/ul[2]/div/div/li/div[3]/form/div[2]/input")]
         private IWebElement inputPasswordField;
 
         [FindsBy(How = How.XPath, Using = "//a[@class = 'ure-btn main-btn js-login-async']")]
@@ -43,17 +43,26 @@ namespace RailEurope.Pages
         [FindsBy(How = How.XPath, Using = "//li[@class = 'rtab transparent-black']")]
         private IWebElement railPassesButton;
 
+        [FindsBy(How = How.XPath, Using = "//div[@id = 'pass_results']")]
+        public IWebElement railPassSearchResult;
+
+        [FindsBy(How = How.XPath, Using = "/html/body/div[7]/article/div/div[2]/div[2]/div[2]/div[1]/span/input")]
+        private IWebElement firstCountryField;
+
         [FindsBy(How = How.XPath, Using = "//button[@class = 'js-ptpform-submit form-submit btn-cta form-pass']")]
         private IWebElement searchRailPassButton;
-
-        [FindsBy(How = How.XPath, Using = "//input[@class = 'input warning']")]
-        public IWebElement requiredCountrySign;
 
         [FindsBy(How = How.XPath, Using = "//div[@class = 'message error-message']")]
         public IWebElement wrongLoginMessage;
 
-        [FindsBy(How = How.XPath, Using = "//a[@class = 'js-hourpickany hourpickany']")]
+        [FindsBy(How = How.XPath, Using = "/html/body/div[70]/div[2]/a")]
         public IWebElement anytimeButton;
+
+        [FindsBy(How = How.XPath, Using = "/html/body/div[7]/article/div/div[2]/div[1]/div/div/div[2]/form/div[2]/div/div[1]/div[2]/div[1]/input[1]")]
+        private IWebElement dataPickerButton;
+
+        [FindsBy(How = How.XPath, Using = "/html/body/div[38]/table/tbody/tr[5]/td[4]")]
+        private IWebElement randomDate;
 
         public static DateTime currentDate = DateTime.Today;
         string stringDate = currentDate.AddDays(3).Day.ToString();
@@ -79,27 +88,28 @@ namespace RailEurope.Pages
 
         public MainPage PickDateAndTime()
         {
-            var rows = tableBody.FindElements(By.TagName("tr"));
-            foreach (var row in rows)
-            {
-                var cells = row.FindElements(By.TagName("td"));
-                foreach (var cell in cells)
-                {
-                    var daysInDataPicker = cell.FindElement(By.TagName("a")).GetAttribute("text");
-                    if (daysInDataPicker == stringDate)
-                    {
-                        cell.Click();
-                    }
-                }
-            }
-            new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(ExpectedConditions.ElementIsVisible(By.ClassName("js-hourpickany hourpickany")));
+            dataPickerButton.Click();
+            randomDate.Click();
+            //var rows = tableBody.FindElements(By.TagName("tr"));
+            //foreach (var row in rows)
+            //{
+            //    var cells = row.FindElements(By.TagName("td"));
+            //    foreach (var cell in cells)
+            //    {
+            //        var daysInDataPicker = cell.FindElement(By.TagName("a")).GetAttribute("text");
+            //        if (daysInDataPicker == stringDate)
+            //        {
+            //            cell.Click();
+            //        }
+            //    }
+            //}
+            //new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(ExpectedConditions.ElementIsVisible(By.ClassName("js-hourpickany hourpickany")));
             anytimeButton.Click();
             return this;
         }
 
         public MainPage InputTripInfo(TripInfo trip)
         {
-            departureStation.Click();
             departureStation.SendKeys(trip.DepartureStation);
             arrivalStation.SendKeys(trip.ArrivalStation);
             return this;
@@ -131,10 +141,21 @@ namespace RailEurope.Pages
             return this;
         }
 
+        public MainPage RailPassesSearchButtonClick()
+        {
+            searchRailPassButton.Click();
+            return this;
+        }
+
         public MainPage RailPassesSearchClick()
         {
             railPassesButton.Click();
-            searchRailPassButton.Click();
+            return this;
+        }
+
+        public MainPage RailPassCountryFill()
+        {
+            firstCountryField.SendKeys("Belgium");
             return this;
         }
 
